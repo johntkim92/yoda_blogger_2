@@ -5,9 +5,13 @@ app.controller('PostsController', ['$http', function($http){
   var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   var controller = this;
   // get all posts
-  $http.get('/posts').success(function(data){
-    controller.posts = data.posts;
-  });
+  this.getPosts = function() {
+    $http.get('/posts').success(function(data){
+      controller.posts = data.posts;
+    });
+  }
+  //get posts on page load
+  this.getPosts();
 
   this.createPost = function() {
     $http.post('/posts', {
@@ -18,6 +22,7 @@ app.controller('PostsController', ['$http', function($http){
       }
     }).success(function(data){
       console.log(data);
+      controller.getPosts();
     });
   }
 }]);
