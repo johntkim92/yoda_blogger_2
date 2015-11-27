@@ -1,4 +1,14 @@
 <main ng-controller="PostsController as posts">
+
+  <h2>All Posts</h2>
+  <ul>
+    <li ng-repeat="post in posts.posts">
+      Title: {{post.title}}
+      <br/>
+      Body: {{post.body}}
+      <br/>
+    </li>
+  </ul>
   <h2>Submit a post</h2>
   <form ng-submit="posts.createPost()">
     <input type="text" placeholder="Title"/>
