@@ -1,0 +1,8 @@
+<main ng-controller="PostsController as posts">
+  <h2>Submit a post</h2>
+  <form ng-submit="posts.createPost()">
+    <input type="text" placeholder="Title"/>
+    <input type="text" placeholder="Body"/>
+    <input type="submit" value="Submit"/>
+  </form>
+</main>
