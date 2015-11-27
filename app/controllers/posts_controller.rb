@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
 
-  include PostsHelper
 
   def index
     @posts = Post.all
@@ -16,9 +15,16 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.save
+    if @post.save
 
-    redirect_to post_path(@post)
+    else
+      render json: {
+        error: {
+          message: @post.errors.full_messages.to_sentence
+        }
+      }
+    end
+
   end
 
   def destroy
@@ -40,5 +46,11 @@ class PostsController < ApplicationController
     redirect_to post_path(@post)
   end
 
+  private
+
+  def post_params
+    return params.require(:post).permit(:title, :body)
+
+  end
 
 end
