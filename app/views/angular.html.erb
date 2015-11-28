@@ -11,11 +11,19 @@
         <input type="submit" value="Delete Post">
       </form>
       <br/>
-      <form ng-submit="posts.editPost(post)">
+      <!-- <form ng-submit="posts.editPost(post)">
         <input type="text" ng-model="posts.editTitle" placeholder="Edit Title" value="{{post.title}}"/>
         <input type="text" ng-model="posts.editBody" placeholder="Edit Body" value="{{post.body}}"/>
         <input type="submit" value="Edit Post"/>
-      </form>
+      </form> -->
+      <div ng-controller="EditController as editCtrl">
+        <form ng-submit="editCtrl.editPost()">
+          <input type="text" ng-model="editCtrl.editTitle" placeholder="Edit Title" value="{{post.title}}"/>
+          <input type="text" ng-model="editCtrl.editBody" placeholder="Edit Body" value="{{post.body}}"/>
+          <input type="submit" value="Edit Post"/>
+        </form>
+      </div>
+
     </li>
   </ul>
   <h2>Submit a post</h2>

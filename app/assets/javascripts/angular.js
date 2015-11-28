@@ -25,19 +25,19 @@ app.controller('PostsController', ['$http', function($http){
       controller.getPosts();
     });
   }
-
-  this.editPost = function(post) {
-    $http.patch('/posts/'+post.id, {
-      authenticity_token: authenticity_token,
-      post: {
-        title: this.editTitle,
-        body: this.editBody
-      }
-    }).success(function(data){
-      console.log(data);
-      controller.getPosts();
-    });
-  }
+  // 
+  // this.editPost = function(post) {
+  //   $http.patch('/posts/'+post.id, {
+  //     authenticity_token: authenticity_token,
+  //     post: {
+  //       title: this.editTitle,
+  //       body: this.editBody
+  //     }
+  //   }).success(function(data){
+  //     console.log(data);
+  //     controller.getPosts();
+  //   });
+  // }
 
   this.deletePost = function(post) {
     $http.delete('/posts/'+post.id, {
@@ -50,3 +50,22 @@ app.controller('PostsController', ['$http', function($http){
   }
 
 }]);
+
+// Testing to see $scope will help edit fields
+app.controller('EditController', ['$http', '$scope', function($http, $scope) {
+  var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+  this.editPost = function() {
+    console.log($scope.$parent.post.id);
+    $http.patch('/posts/'+$scope.$parent.post.id, {
+      authenticity_token: authenticity_token,
+      post: {
+        title: this.editTitle,
+        body: this.editBody
+      }
+    }).success(function(data){
+      console.log(data);
+      $scope.$parent.posts.getPosts();
+    });
+  }
+}])
