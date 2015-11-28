@@ -25,4 +25,28 @@ app.controller('PostsController', ['$http', function($http){
       controller.getPosts();
     });
   }
+
+  this.editPost = function(post) {
+    $http.patch('/posts/'+post.id, {
+      authenticity_token: authenticity_token,
+      post: {
+        title: this.editTitle,
+        body: this.editBody
+      }
+    }).success(function(data){
+      console.log(data);
+      controller.getPosts();
+    });
+  }
+
+  this.deletePost = function(post) {
+    $http.delete('/posts/'+post.id, {
+      authenticity_token: authenticity_token,
+    }).success(function(data) {
+      controller.getPosts();
+    }).error(function(data, status) {
+      controller.getPosts();
+    });
+  }
+
 }]);

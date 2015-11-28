@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-
+  skip_before_action :verify_authenticity_token
 
   def index
     @posts = Post.all
@@ -30,7 +30,6 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path
   end
 
   def edit
@@ -41,9 +40,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.update(post_params)
 
-    flash.notice = "Post '#{@post.title}' was updated!"
 
-    redirect_to post_path(@post)
   end
 
   private

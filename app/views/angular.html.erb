@@ -7,6 +7,15 @@
       <br/>
       Body: {{post.body}}
       <br/>
+      <form ng-submit="posts.deletePost(post)">
+        <input type="submit" value="Delete Post">
+      </form>
+      <br/>
+      <form ng-submit="posts.editPost(post)">
+        <input type="text" ng-model="posts.editTitle" placeholder="Edit Title" value="{{post.title}}"/>
+        <input type="text" ng-model="posts.editBody" placeholder="Edit Body" value="{{post.body}}"/>
+        <input type="submit" value="Edit Post"/>
+      </form>
     </li>
   </ul>
   <h2>Submit a post</h2>
